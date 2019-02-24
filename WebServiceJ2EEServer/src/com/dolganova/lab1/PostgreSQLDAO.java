@@ -1,7 +1,4 @@
 package com.dolganova.lab1;
-/**
- * Created by Polina on 23.02.19.
- */
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,10 +10,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PostgreSQLDAO {
+    private Connection connection;
+
+    public PostgreSQLDAO(){};
+
+    public PostgreSQLDAO(Connection connection) {
+        this.connection = connection;
+    }
 
     public List<Person> getPersons() {
         List<Person> persons = new ArrayList<>();
-        try (Connection connection = ConnectionUtil.getConnection()) {
+        try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("select * from persons");
             while (rs.next()) {
@@ -53,7 +57,7 @@ public class PostgreSQLDAO {
 
     public List<Person> findPeople(String query) {
         List<Person> persons = new ArrayList<>();
-        try (Connection connection = ConnectionUtil.getConnection()){
+        try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {

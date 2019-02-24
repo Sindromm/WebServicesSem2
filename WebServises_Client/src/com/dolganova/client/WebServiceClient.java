@@ -17,15 +17,27 @@ public class WebServiceClient {
     public static void main(String[] args) throws MalformedURLException {
         URL url = new URL("http://localhost:8080/PersonService?wsdl");
 
-        PersonService personService = new PersonService(url);
-
-        System.out.println("Please, write your query: key=value, separated by comma.");
-        System.out.println("Available keys: id, name, surname, age, profession.");
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
+        System.out.println("Choose service type: 1-standalone, 2-J2EE");
+        PersonService personService;
         try {
+            String servType = br.readLine();
+            switch (servType) {
+                case "1":
+                    personService = new PersonService(url);
+                    break;
+                case "2":
+                    personService = new PersonService(new URL("http://localhost:8080/WebServiceJ2EEServer_war_exploded/PersonService?wsdl"));
+                    break;
+                default:
+                    System.out.println("Wrong enter!");
+                    return;
+            }
+
+            System.out.println("Please, write your query: key=value, separated by comma.");
+            System.out.println("Available keys: id, name, surname, age, profession.");
+
             String userQuery = br.readLine();
             String keysValue[] = userQuery.split(",");
             String id = "", name = "", surname = "", age = "", profession = "";
@@ -64,5 +76,4 @@ public class WebServiceClient {
             System.out.println(e);
         }
     }
-
 }
