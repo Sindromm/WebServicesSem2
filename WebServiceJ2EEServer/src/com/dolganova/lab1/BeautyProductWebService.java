@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebService(serviceName = "PersonService")
-public class PersonWebService {
+@WebService(serviceName = "BeautyProductService")
+public class BeautyProductWebService {
     @Resource(lookup = "jdbc/mvideo")
     private DataSource dataSource;
 
-    @WebMethod(operationName = "getPersons")
-    public List<Person> getAllPersons() {
+    @WebMethod(operationName = "getBeautyProducts")
+    public List<BeautyProduct> getBeautyProducts() {
         PostgreSQLDAO dao = new PostgreSQLDAO(getConnection());
-        return dao.getPersons();
+        return dao.getBeautyProducts();
     }
 
-    @WebMethod(operationName = "findPeople")
-    public List<Person> findPeople(String id, String name, String surname, String age, String profession) {
+    @WebMethod(operationName = "findBeautyProduct")
+    public List<BeautyProduct> findBeautyProduct(String id, String name, String producingСountry, String vendorСode, String category, String price) {
         PostgreSQLDAO dao = new PostgreSQLDAO(getConnection());
-        return dao.findPeople(id, name, surname, age, profession);
+        return dao.findBeautyProduct(id, name, producingСountry, vendorСode, category, price);
     }
 
     private Connection getConnection() {
@@ -33,7 +33,7 @@ public class PersonWebService {
             result = dataSource.getConnection();
         }
         catch (SQLException ex) {
-            Logger.getLogger(PersonWebService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeautyProductWebService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }

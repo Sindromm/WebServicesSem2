@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.test package. 
+ * generated in the com.dolganova.generated package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -24,92 +24,92 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _FindPeopleResponse_QNAME = new QName("http://lab1.dolganova.com/", "findPeopleResponse");
-    private final static QName _GetPersonsResponse_QNAME = new QName("http://lab1.dolganova.com/", "getPersonsResponse");
-    private final static QName _GetPersons_QNAME = new QName("http://lab1.dolganova.com/", "getPersons");
-    private final static QName _FindPeople_QNAME = new QName("http://lab1.dolganova.com/", "findPeople");
+    private final static QName _GetBeautyProductsResponse_QNAME = new QName("http://lab1.dolganova.com/", "getBeautyProductsResponse");
+    private final static QName _GetBeautyProducts_QNAME = new QName("http://lab1.dolganova.com/", "getBeautyProducts");
+    private final static QName _FindBeautyProductResponse_QNAME = new QName("http://lab1.dolganova.com/", "findBeautyProductResponse");
+    private final static QName _FindBeautyProduct_QNAME = new QName("http://lab1.dolganova.com/", "findBeautyProduct");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.test
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.dolganova.generated
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link FindPeople }
+     * Create an instance of {@link FindBeautyProduct }
      * 
      */
-    public FindPeople createFindPeople() {
-        return new FindPeople();
+    public FindBeautyProduct createFindBeautyProduct() {
+        return new FindBeautyProduct();
     }
 
     /**
-     * Create an instance of {@link GetPersons }
+     * Create an instance of {@link FindBeautyProductResponse }
      * 
      */
-    public GetPersons createGetPersons() {
-        return new GetPersons();
+    public FindBeautyProductResponse createFindBeautyProductResponse() {
+        return new FindBeautyProductResponse();
     }
 
     /**
-     * Create an instance of {@link GetPersonsResponse }
+     * Create an instance of {@link GetBeautyProducts }
      * 
      */
-    public GetPersonsResponse createGetPersonsResponse() {
-        return new GetPersonsResponse();
+    public GetBeautyProducts createGetBeautyProducts() {
+        return new GetBeautyProducts();
     }
 
     /**
-     * Create an instance of {@link FindPeopleResponse }
+     * Create an instance of {@link GetBeautyProductsResponse }
      * 
      */
-    public FindPeopleResponse createFindPeopleResponse() {
-        return new FindPeopleResponse();
+    public GetBeautyProductsResponse createGetBeautyProductsResponse() {
+        return new GetBeautyProductsResponse();
     }
 
     /**
-     * Create an instance of {@link Person }
+     * Create an instance of {@link BeautyProduct }
      * 
      */
-    public Person createPerson() {
-        return new Person();
+    public BeautyProduct createBeautyProduct() {
+        return new BeautyProduct();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link FindPeopleResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetBeautyProductsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "findPeopleResponse")
-    public JAXBElement<FindPeopleResponse> createFindPeopleResponse(FindPeopleResponse value) {
-        return new JAXBElement<FindPeopleResponse>(_FindPeopleResponse_QNAME, FindPeopleResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "getBeautyProductsResponse")
+    public JAXBElement<GetBeautyProductsResponse> createGetBeautyProductsResponse(GetBeautyProductsResponse value) {
+        return new JAXBElement<GetBeautyProductsResponse>(_GetBeautyProductsResponse_QNAME, GetBeautyProductsResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersonsResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetBeautyProducts }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "getPersonsResponse")
-    public JAXBElement<GetPersonsResponse> createGetPersonsResponse(GetPersonsResponse value) {
-        return new JAXBElement<GetPersonsResponse>(_GetPersonsResponse_QNAME, GetPersonsResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "getBeautyProducts")
+    public JAXBElement<GetBeautyProducts> createGetBeautyProducts(GetBeautyProducts value) {
+        return new JAXBElement<GetBeautyProducts>(_GetBeautyProducts_QNAME, GetBeautyProducts.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPersons }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBeautyProductResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "getPersons")
-    public JAXBElement<GetPersons> createGetPersons(GetPersons value) {
-        return new JAXBElement<GetPersons>(_GetPersons_QNAME, GetPersons.class, null, value);
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "findBeautyProductResponse")
+    public JAXBElement<FindBeautyProductResponse> createFindBeautyProductResponse(FindBeautyProductResponse value) {
+        return new JAXBElement<FindBeautyProductResponse>(_FindBeautyProductResponse_QNAME, FindBeautyProductResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link FindPeople }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link FindBeautyProduct }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "findPeople")
-    public JAXBElement<FindPeople> createFindPeople(FindPeople value) {
-        return new JAXBElement<FindPeople>(_FindPeople_QNAME, FindPeople.class, null, value);
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "findBeautyProduct")
+    public JAXBElement<FindBeautyProduct> createFindBeautyProduct(FindBeautyProduct value) {
+        return new JAXBElement<FindBeautyProduct>(_FindBeautyProduct_QNAME, FindBeautyProduct.class, null, value);
     }
 
 }

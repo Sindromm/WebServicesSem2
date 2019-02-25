@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getPersonsResponse complex type.
+ * <p>Java class for getBeautyProductsResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getPersonsResponse">
+ * &lt;complexType name="getBeautyProductsResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://lab1.dolganova.com/}person" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://lab1.dolganova.com/}beautyProduct" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPersonsResponse", propOrder = {
+@XmlType(name = "getBeautyProductsResponse", propOrder = {
     "_return"
 })
-public class GetPersonsResponse {
+public class GetBeautyProductsResponse {
 
     @XmlElement(name = "return")
-    protected List<Person> _return;
+    protected List<BeautyProduct> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class GetPersonsResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Person }
+     * {@link BeautyProduct }
      * 
      * 
      */
-    public List<Person> getReturn() {
+    public List<BeautyProduct> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<Person>();
+            _return = new ArrayList<BeautyProduct>();
         }
         return this._return;
     }

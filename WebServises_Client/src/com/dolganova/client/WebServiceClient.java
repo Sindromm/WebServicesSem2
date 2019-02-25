@@ -3,8 +3,8 @@ package com.dolganova.client;
  * Created by mvideo on 23.02.19.
  */
 
-import com.dolganova.generated.Person;
-import com.dolganova.generated.PersonService;
+import com.dolganova.generated.BeautyProduct;
+import com.dolganova.generated.BeautyProductService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,21 +14,22 @@ import java.net.URL;
 import java.util.List;
 
 public class WebServiceClient {
+
     public static void main(String[] args) throws MalformedURLException {
-        URL url = new URL("http://localhost:8080/PersonService?wsdl");
+        URL url = new URL("http://localhost:8080/BeautyProductService?wsdl");
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Choose service type: 1-standalone, 2-J2EE");
-        PersonService personService;
+        BeautyProductService beautyProductService;
         try {
             String servType = br.readLine();
             switch (servType) {
                 case "1":
-                    personService = new PersonService(url);
+                    beautyProductService = new BeautyProductService(url);
                     break;
                 case "2":
-                    personService = new PersonService(new URL("http://localhost:8080/WebServiceJ2EEServer_war_exploded/PersonService?wsdl"));
+                    beautyProductService = new BeautyProductService(new URL("http://localhost:8080/WebServiceJ2EEServer_war_exploded/BeautyProductService?wsdl"));
                     break;
                 default:
                     System.out.println("Wrong enter!");
@@ -36,11 +37,11 @@ public class WebServiceClient {
             }
 
             System.out.println("Please, write your query: key=value, separated by comma.");
-            System.out.println("Available keys: id, name, surname, age, profession.");
+            System.out.println("Available keys: id, name, producingСountry, vendorСode, category, price.");
 
             String userQuery = br.readLine();
             String keysValue[] = userQuery.split(",");
-            String id = "", name = "", surname = "", age = "", profession = "";
+            String id = "", name = "", producingСountry = "", vendorСode = "", category = "", price="";
             for (int j = 0; j < keysValue.length; j++) {
                 String temp[] = keysValue[j].split("=");
                 switch (temp[0]) {
@@ -50,26 +51,31 @@ public class WebServiceClient {
                     case "name":
                         name = temp[1];
                         break;
-                    case "surname":
-                        surname = temp[1];
+                    case "producingСountry":
+                        producingСountry = temp[1];
                         break;
-                    case "age":
-                        age = temp[1];
+                    case "vendorСode":
+                        vendorСode = temp[1];
                         break;
-                    case "profession":
-                        profession = temp[1];
+                    case "category":
+                        category = temp[1];
+                        break;
+                    case "price":
+                        price = temp[1];
                         break;
                 }
             }
 
-            List<Person> persons = personService.getPersonWebServicePort().findPeople(id, name, surname, age, profession);
-            for (Person person : persons) {
-                System.out.println("Person{name=" + person.getName() +
-                        ", surname=" + person.getSurname() +
-                        ", age=" + person.getAge() +
-                        ", profession=" + person.getProfession() + "}");
+            List<BeautyProduct> beautyProducts = beautyProductService.getBeautyProductWebServicePort().findBeautyProduct(id, name, producingСountry, vendorСode, category, price);
+            for (BeautyProduct beautyProduct : beautyProducts) {
+                System.out.println("Beauty product{id = " + beautyProduct.getId() +
+                        ", name = " + beautyProduct.getName() +
+                        ", producingСountry = " + beautyProduct.getProducingСountry() +
+                        ", vendorСode = " + beautyProduct.getVendorСode() +
+                        ", category = " + beautyProduct.getCategory() +
+                        ", price = " + beautyProduct.getPrice() + "}");
             }
-            System.out.println("Total persons: " + persons.size());
+            System.out.println("Total beauty products: " + beautyProducts.size());
         }
         catch (IOException e)
         {

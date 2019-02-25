@@ -12,7 +12,7 @@ import javax.xml.ws.Endpoint;
 public class App {
         public static void main(String[] args) {
             System.out.println("Start");
-            String url = "http://0.0.0.0:8080/PersonService";
-            Endpoint.publish(url, new PersonWebService());
+            String url = "http://localhost:8080/BeautyProductService";
+            Endpoint.publish(url, new BeautyProductWebService());
         }
 }
