@@ -41,6 +41,78 @@ public interface BeautyProductWebService {
      * 
      * @param arg3
      * @param arg2
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "insertBeautyProduct", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.InsertBeautyProduct")
+    @ResponseWrapper(localName = "insertBeautyProductResponse", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.InsertBeautyProductResponse")
+    @Action(input = "http://lab1.dolganova.com/BeautyProductWebService/insertBeautyProductRequest", output = "http://lab1.dolganova.com/BeautyProductWebService/insertBeautyProductResponse")
+    public Integer insertBeautyProduct(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2,
+        @WebParam(name = "arg3", targetNamespace = "")
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        String arg4);
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
+     * @param arg5
+     * @param arg4
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "updateBeautyProduct", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.UpdateBeautyProduct")
+    @ResponseWrapper(localName = "updateBeautyProductResponse", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.UpdateBeautyProductResponse")
+    @Action(input = "http://lab1.dolganova.com/BeautyProductWebService/updateBeautyProductRequest", output = "http://lab1.dolganova.com/BeautyProductWebService/updateBeautyProductResponse")
+    public String updateBeautyProduct(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2,
+        @WebParam(name = "arg3", targetNamespace = "")
+        String arg3,
+        @WebParam(name = "arg4", targetNamespace = "")
+        String arg4,
+        @WebParam(name = "arg5", targetNamespace = "")
+        String arg5);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "deleteBeautyProduct", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.DeleteBeautyProduct")
+    @ResponseWrapper(localName = "deleteBeautyProductResponse", targetNamespace = "http://lab1.dolganova.com/", className = "com.dolganova.generated.DeleteBeautyProductResponse")
+    @Action(input = "http://lab1.dolganova.com/BeautyProductWebService/deleteBeautyProductRequest", output = "http://lab1.dolganova.com/BeautyProductWebService/deleteBeautyProductResponse")
+    public String deleteBeautyProduct(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
+
+    /**
+     * 
+     * @param arg3
+     * @param arg2
      * @param arg5
      * @param arg4
      * @param arg1

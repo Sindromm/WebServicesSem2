@@ -27,7 +27,13 @@ public class ObjectFactory {
     private final static QName _GetBeautyProductsResponse_QNAME = new QName("http://lab1.dolganova.com/", "getBeautyProductsResponse");
     private final static QName _GetBeautyProducts_QNAME = new QName("http://lab1.dolganova.com/", "getBeautyProducts");
     private final static QName _FindBeautyProductResponse_QNAME = new QName("http://lab1.dolganova.com/", "findBeautyProductResponse");
+    private final static QName _DeleteBeautyProductResponse_QNAME = new QName("http://lab1.dolganova.com/", "deleteBeautyProductResponse");
+    private final static QName _InsertBeautyProductResponse_QNAME = new QName("http://lab1.dolganova.com/", "insertBeautyProductResponse");
+    private final static QName _UpdateBeautyProduct_QNAME = new QName("http://lab1.dolganova.com/", "updateBeautyProduct");
+    private final static QName _UpdateBeautyProductResponse_QNAME = new QName("http://lab1.dolganova.com/", "updateBeautyProductResponse");
     private final static QName _FindBeautyProduct_QNAME = new QName("http://lab1.dolganova.com/", "findBeautyProduct");
+    private final static QName _DeleteBeautyProduct_QNAME = new QName("http://lab1.dolganova.com/", "deleteBeautyProduct");
+    private final static QName _InsertBeautyProduct_QNAME = new QName("http://lab1.dolganova.com/", "insertBeautyProduct");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.dolganova.generated
@@ -42,6 +48,54 @@ public class ObjectFactory {
      */
     public FindBeautyProduct createFindBeautyProduct() {
         return new FindBeautyProduct();
+    }
+
+    /**
+     * Create an instance of {@link UpdateBeautyProduct }
+     * 
+     */
+    public UpdateBeautyProduct createUpdateBeautyProduct() {
+        return new UpdateBeautyProduct();
+    }
+
+    /**
+     * Create an instance of {@link UpdateBeautyProductResponse }
+     * 
+     */
+    public UpdateBeautyProductResponse createUpdateBeautyProductResponse() {
+        return new UpdateBeautyProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteBeautyProductResponse }
+     * 
+     */
+    public DeleteBeautyProductResponse createDeleteBeautyProductResponse() {
+        return new DeleteBeautyProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertBeautyProductResponse }
+     * 
+     */
+    public InsertBeautyProductResponse createInsertBeautyProductResponse() {
+        return new InsertBeautyProductResponse();
+    }
+
+    /**
+     * Create an instance of {@link DeleteBeautyProduct }
+     * 
+     */
+    public DeleteBeautyProduct createDeleteBeautyProduct() {
+        return new DeleteBeautyProduct();
+    }
+
+    /**
+     * Create an instance of {@link InsertBeautyProduct }
+     * 
+     */
+    public InsertBeautyProduct createInsertBeautyProduct() {
+        return new InsertBeautyProduct();
     }
 
     /**
@@ -104,12 +158,66 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteBeautyProductResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "deleteBeautyProductResponse")
+    public JAXBElement<DeleteBeautyProductResponse> createDeleteBeautyProductResponse(DeleteBeautyProductResponse value) {
+        return new JAXBElement<DeleteBeautyProductResponse>(_DeleteBeautyProductResponse_QNAME, DeleteBeautyProductResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertBeautyProductResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "insertBeautyProductResponse")
+    public JAXBElement<InsertBeautyProductResponse> createInsertBeautyProductResponse(InsertBeautyProductResponse value) {
+        return new JAXBElement<InsertBeautyProductResponse>(_InsertBeautyProductResponse_QNAME, InsertBeautyProductResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateBeautyProduct }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "updateBeautyProduct")
+    public JAXBElement<UpdateBeautyProduct> createUpdateBeautyProduct(UpdateBeautyProduct value) {
+        return new JAXBElement<UpdateBeautyProduct>(_UpdateBeautyProduct_QNAME, UpdateBeautyProduct.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateBeautyProductResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "updateBeautyProductResponse")
+    public JAXBElement<UpdateBeautyProductResponse> createUpdateBeautyProductResponse(UpdateBeautyProductResponse value) {
+        return new JAXBElement<UpdateBeautyProductResponse>(_UpdateBeautyProductResponse_QNAME, UpdateBeautyProductResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FindBeautyProduct }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "findBeautyProduct")
     public JAXBElement<FindBeautyProduct> createFindBeautyProduct(FindBeautyProduct value) {
         return new JAXBElement<FindBeautyProduct>(_FindBeautyProduct_QNAME, FindBeautyProduct.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DeleteBeautyProduct }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "deleteBeautyProduct")
+    public JAXBElement<DeleteBeautyProduct> createDeleteBeautyProduct(DeleteBeautyProduct value) {
+        return new JAXBElement<DeleteBeautyProduct>(_DeleteBeautyProduct_QNAME, DeleteBeautyProduct.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertBeautyProduct }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://lab1.dolganova.com/", name = "insertBeautyProduct")
+    public JAXBElement<InsertBeautyProduct> createInsertBeautyProduct(InsertBeautyProduct value) {
+        return new JAXBElement<InsertBeautyProduct>(_InsertBeautyProduct_QNAME, InsertBeautyProduct.class, null, value);
     }
 
 }

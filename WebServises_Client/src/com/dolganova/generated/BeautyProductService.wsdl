@@ -10,6 +10,24 @@
 <message name="getBeautyProductsResponse">
 <part name="parameters" element="tns:getBeautyProductsResponse"></part>
 </message>
+<message name="insertBeautyProduct">
+<part name="parameters" element="tns:insertBeautyProduct"></part>
+</message>
+<message name="insertBeautyProductResponse">
+<part name="parameters" element="tns:insertBeautyProductResponse"></part>
+</message>
+<message name="updateBeautyProduct">
+<part name="parameters" element="tns:updateBeautyProduct"></part>
+</message>
+<message name="updateBeautyProductResponse">
+<part name="parameters" element="tns:updateBeautyProductResponse"></part>
+</message>
+<message name="deleteBeautyProduct">
+<part name="parameters" element="tns:deleteBeautyProduct"></part>
+</message>
+<message name="deleteBeautyProductResponse">
+<part name="parameters" element="tns:deleteBeautyProductResponse"></part>
+</message>
 <message name="findBeautyProduct">
 <part name="parameters" element="tns:findBeautyProduct"></part>
 </message>
@@ -21,6 +39,18 @@
 <input wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/getBeautyProductsRequest" message="tns:getBeautyProducts"></input>
 <output wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/getBeautyProductsResponse" message="tns:getBeautyProductsResponse"></output>
 </operation>
+<operation name="insertBeautyProduct">
+<input wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/insertBeautyProductRequest" message="tns:insertBeautyProduct"></input>
+<output wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/insertBeautyProductResponse" message="tns:insertBeautyProductResponse"></output>
+</operation>
+<operation name="updateBeautyProduct">
+<input wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/updateBeautyProductRequest" message="tns:updateBeautyProduct"></input>
+<output wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/updateBeautyProductResponse" message="tns:updateBeautyProductResponse"></output>
+</operation>
+<operation name="deleteBeautyProduct">
+<input wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/deleteBeautyProductRequest" message="tns:deleteBeautyProduct"></input>
+<output wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/deleteBeautyProductResponse" message="tns:deleteBeautyProductResponse"></output>
+</operation>
 <operation name="findBeautyProduct">
 <input wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/findBeautyProductRequest" message="tns:findBeautyProduct"></input>
 <output wsam:Action="http://lab1.dolganova.com/BeautyProductWebService/findBeautyProductResponse" message="tns:findBeautyProductResponse"></output>
@@ -29,6 +59,33 @@
 <binding name="BeautyProductWebServicePortBinding" type="tns:BeautyProductWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"></soap:binding>
 <operation name="getBeautyProducts">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="insertBeautyProduct">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="updateBeautyProduct">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="deleteBeautyProduct">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

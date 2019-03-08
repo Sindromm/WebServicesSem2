@@ -18,6 +18,27 @@ public class BeautyProductWebService {
         return beautyProducts;
     }
 
+    @WebMethod(operationName = "insertBeautyProduct")
+    public Integer insertBeautyProduct(String name, String producingСountry, String vendorСode, String category, String price) {
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        Integer beautyProductId = dao.insertBeautyProduct(name, producingСountry, vendorСode, category, price);
+        return beautyProductId;
+    }
+
+    @WebMethod(operationName = "updateBeautyProduct")
+    public String updateBeautyProduct(String id, String name, String producingСountry, String vendorСode, String category, String price) {
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        String status = dao.updateBeautyProduct(id, name, producingСountry, vendorСode, category, price) ;
+        return status;
+    }
+
+    @WebMethod(operationName = "deleteBeautyProduct")
+    public String deleteBeautyProduct(String id) {
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        String status = dao.deleteBeautyProduct(id) ;
+        return status;
+    }
+
     @WebMethod(operationName = "findBeautyProduct")
     public List<BeautyProduct> findBeautyProduct(String id, String name, String producingСountry, String vendorСode, String category, String price) {
         PostgreSQLDAO dao = new PostgreSQLDAO();
