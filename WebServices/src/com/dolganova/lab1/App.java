@@ -12,6 +12,8 @@ import javax.xml.ws.Endpoint;
 public class App {
         public static void main(String[] args) {
             System.out.println("Start");
+            System.setProperty("com.sun.xml.ws.fault.SOAPFaultBuilder.disableCaptureStackTrace",
+                    "false");
             String url = "http://localhost:8080/BeautyProductService";
             Endpoint.publish(url, new BeautyProductWebService());
         }

@@ -52,28 +52,34 @@ public class WebServiceClient {
             System.out.println("Please, select the type of action: 0 - select all, 1 - select, 2 - insert, 3 - update, 4 - delete, 5 - quit");
             try {
                 String actionType = br.readLine();
-                switch (actionType) {
-                    case "0":
-                        getAllBeautyProducts();
-                        break;
-                    case "1":
-                        findBeautyProduct(br);
-                        break;
-                    case "2":
-                        insertBeautyProduct(br);
-                        break;
-                    case "3":
-                        updateBeautyProduct(br);
-                        break;
-                    case "4":
-                        deleteBeautyProduct(br);
-                        break;
-                    case "5":
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Wrong choose");
-                        break;
+                try {
+                    switch (actionType) {
+                        case "0":
+                            getAllBeautyProducts();
+                            break;
+                        case "1":
+                            findBeautyProduct(br);
+                            break;
+                        case "2":
+                            insertBeautyProduct(br);
+                            break;
+                        case "3":
+                            updateBeautyProduct(br);
+                            break;
+                        case "4":
+                            deleteBeautyProduct(br);
+                            break;
+                        case "5":
+                            System.exit(0);
+                            break;
+                        default:
+                            System.out.println("Wrong choose");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Received error: " + ex.getMessage());
                 }
             } catch (IOException e) {
                 System.out.println(e);
