@@ -8,7 +8,7 @@ import com.sun.jersey.api.core.ClassNamesResourceConfig;
 import com.sun.jersey.api.core.ResourceConfig;
 
 public class App {
-    private static final URI BASE_URI = URI.create("http://localhost:8081/rest/");
+    private static final URI BASE_URI = URI.create("http://localhost:8080/rest/");
 
     public static void main(String[] args) {
         System.out.println("Start");

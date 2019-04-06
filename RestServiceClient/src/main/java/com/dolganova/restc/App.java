@@ -12,38 +12,14 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 
 public class App {
-    private static final String URL = "http://localhost:8081/rest/beautyProducts";
+    private static final String URL = "http://localhost:8080/rest/beautyProducts";
 
     public static void main(String[] args) {
         Client client = Client.create();
-        processQueryToStandalone(client);
-
-        /*
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Choose service type: 1-standalone, 2-J2EE");
-        try {
-            String serviceType = br.readLine();
-            switch (serviceType) {
-                case "1":
-                    //beautyProductService = new BeautyProductService(url);
-                    processQueryToStandalone(client);
-                    break;
-                case "2":
-                    //beautyProductService = new BeautyProductService(new URL("http://localhost:8080/WebServiceJ2EEServer_war_exploded/BeautyProductService?wsdl"));
-                    //processQueryToJ2EE();
-                    break;
-                default:
-                    System.out.println("Wrong enter!");
-                    return;
-            }
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }*/
+        processQuery(client);
     }
 
-    private static void processQueryToStandalone(Client client) {
+    private static void processQuery(Client client) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         while (true) {
             System.out.println("Please, select the type of action: 0 - print all, 1 - find, 2 - quit");
