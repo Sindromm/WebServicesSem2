@@ -1,9 +1,9 @@
 package com.dolganova.rest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import com.dolganova.exception.EmptyIdentifierException;
+import com.dolganova.exception.NonKeySpecifiedException;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -20,11 +20,7 @@ public class BeautyProductResource {
                                                  @QueryParam("price") String price)
     {
         if ((id == null || id.isEmpty()) &&
-                (name == null || name.isEmpty()) &&
-                (producingCountry == null || producingCountry.isEmpty()) &&
-                (vendorCode == null || vendorCode.isEmpty()) &&
-                (category == null || category.isEmpty())&&
-                (price == null || price.isEmpty())) {
+                isBodyFieldsEmpty(name, producingCountry, vendorCode, category, price)) {
             List<BeautyProduct> beautyProducts = new PostgreSQLDAO().getBeautyProducts();
             return beautyProducts;
         }
@@ -39,5 +35,61 @@ public class BeautyProductResource {
         return beautyProducts;
     }
 
+    @POST
+    public String insertBeautyProduct(@QueryParam("name") String name,
+                                       @QueryParam("producingCountry") String producingCountry,
+                                       @QueryParam("vendorCode") String vendorCode,
+                                       @QueryParam("category") String category,
+                                       @QueryParam("price") String price) throws NonKeySpecifiedException
+     {
+        if (isBodyFieldsEmpty(name, producingCountry, vendorCode, category, price))
+        {
+            throw NonKeySpecifiedException.DEFAULT_INSTANCE;
+        }
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        Integer beautyProductId = dao.insertBeautyProduct(name, producingCountry, vendorCode, category, price);
+        return beautyProductId.toString();
+    }
 
+    @PUT
+    public String updateBeautyProduct(@QueryParam("id") String id,
+                                      @QueryParam("name") String name,
+                                      @QueryParam("producingCountry") String producingCountry,
+                                      @QueryParam("vendorCode") String vendorCode,
+                                      @QueryParam("category") String category,
+                                      @QueryParam("price") String price) throws EmptyIdentifierException, NonKeySpecifiedException {
+        if (id == null || id.isEmpty())
+        {
+            throw EmptyIdentifierException.DEFAULT_INSTANCE;
+        }
+        if (isBodyFieldsEmpty(name, producingCountry, vendorCode, category, price))
+        {
+            throw NonKeySpecifiedException.DEFAULT_INSTANCE;
+        }
+
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        String status = dao.updateBeautyProduct(id, name, producingCountry, vendorCode, category, price) ;
+        return status;
+    }
+
+    @DELETE
+    public String deleteBeautyProduct(@QueryParam("id") String id) throws EmptyIdentifierException
+    {
+        if (id == null || id.isEmpty())
+        {
+            throw EmptyIdentifierException.DEFAULT_INSTANCE;
+        }
+        PostgreSQLDAO dao = new PostgreSQLDAO();
+        String status = dao.deleteBeautyProduct(id);
+        return status;
+    }
+
+    private Boolean isBodyFieldsEmpty(String name, String producingCountry, String vendorCode, String category, String price)
+    {
+        return (name == null || name.isEmpty()) &&
+               (producingCountry == null || producingCountry.isEmpty()) &&
+               (vendorCode == null || vendorCode.isEmpty()) &&
+               (category == null || category.isEmpty())&&
+               (price == null || price.isEmpty());
+    }
 }

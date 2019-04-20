@@ -2,6 +2,8 @@ package com.dolganova.rest;
 
 import java.io.IOException;
 import java.net.URI;
+
+import com.sun.jersey.api.core.PackagesResourceConfig;
 import org.glassfish.grizzly.http.server.HttpServer;
 import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
 import com.sun.jersey.api.core.ClassNamesResourceConfig;
@@ -14,7 +16,7 @@ public class App {
         System.out.println("Start");
         HttpServer server = null;
         try {
-            ResourceConfig resourceConfig = new ClassNamesResourceConfig(BeautyProductResource.class);
+            ResourceConfig resourceConfig = new PackagesResourceConfig(BeautyProductResource.class.getPackage().getName());
             server = GrizzlyServerFactory.createHttpServer(BASE_URI, resourceConfig);
             server.start();
             System.in.read();

@@ -39,7 +39,7 @@ public class BeautyProduct {
 
     @Override
     public String toString() {
-        return "BeautyProduct{ id = " + id + ", name = " + name + ", vendor code " + vendorCode +
+        return "BeautyProduct{ id = " + id + ", name = " + name + ", vendor code = " + vendorCode +
                 ", producing country = " + producingCountry + ", category = " + category + ", price = " + price +'}';
     }
 }

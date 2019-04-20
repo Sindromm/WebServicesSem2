@@ -1,9 +1,6 @@
 package com.dolganova.rest;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,12 +19,11 @@ public class PostgreSQLDAO {
             while (rs.next()) {
                 Integer id = rs.getInt("id");
                 String name = rs.getString("name");
-                String producingСountry = rs.getString("producingСountry");
-                Integer vendorСode = rs.getInt("vendorСode");
+                String producingCountry = rs.getString("producingСountry");
+                Integer vendorCode = rs.getInt("vendorСode");
                 String category = rs.getString("category");
                 Double price = rs.getDouble("price");
-
-                BeautyProduct beautyProduct = new BeautyProduct(id, name, producingСountry, vendorСode, category, price);
+                BeautyProduct beautyProduct = new BeautyProduct(id, name, producingCountry, vendorCode, category, price);
                 beautyProducts.add(beautyProduct);
             }
         } catch (SQLException ex) {
@@ -36,15 +32,15 @@ public class PostgreSQLDAO {
         return beautyProducts;
     }
 
-    public List<BeautyProduct> findBeautyProduct(String id, String name, String producingСountry, String vendorСode, String category, String price)
+    public List<BeautyProduct> findBeautyProduct(String id, String name, String producingCountry, String vendorCode, String category, String price)
     {
-        System.out.println("Debug findBeautyProduct params: " + id + " " + name + " " + producingСountry + " " + vendorСode + " " + price);
+        System.out.println("Debug findBeautyProduct params: " + id + " " + name + " " + producingCountry + " " + vendorCode + " " + price);
 
         ArrayList<String> query_where = new ArrayList<String>();
         if ((id != null) && !id.isEmpty()) query_where.add("id=" + id + "");
         if ((name != null) && !name.isEmpty()) query_where.add("name='" + name + "'");
-        if ((producingСountry != null) && !producingСountry.isEmpty()) query_where.add("producingСountry='" + producingСountry + "'");
-        if ((vendorСode != null) && !vendorСode.isEmpty()) query_where.add("vendorСode='" + vendorСode + "'");
+        if ((producingCountry != null) && !producingCountry.isEmpty()) query_where.add("producingCountry='" + producingCountry + "'");
+        if ((vendorCode != null) && !vendorCode.isEmpty()) query_where.add("vendorCode='" + vendorCode + "'");
         if ((category != null) && !category.isEmpty()) query_where.add("category=" + category + "");
         if ((price != null) && !price.isEmpty()) query_where.add("price=" + price + "");
 
@@ -78,6 +74,162 @@ public class PostgreSQLDAO {
             Logger.getLogger(PostgreSQLDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return beautyProducts;
+    }
+
+    public Integer insertBeautyProduct(String name, String producingCountry, String vendorCode, String category, String price)
+    {
+        ArrayList<String> keys = new ArrayList<String>();
+        ArrayList<String> values = new ArrayList<String>();
+        if ((name != null) && !name.isEmpty())
+        {
+            keys.add("name");
+            values.add("?");
+        }
+        if ((vendorCode != null) && !vendorCode.isEmpty())
+        {
+            keys.add("vendorСode");
+            values.add("?");
+        }
+        if ((producingCountry != null) && !producingCountry.isEmpty())
+        {
+            keys.add("producingСountry");
+            values.add("?");
+        }
+        if ((category != null ) && !category.isEmpty())
+        {
+            keys.add("category");
+            values.add("?");
+        }
+        if ((price != null) && !price.isEmpty())
+        {
+            keys.add("price");
+            values.add("?");
+        }
+
+        String query = "INSERT INTO \"BeautyProducts\"(" + String.join(", ", keys) + ") VALUES (" + String.join(", ", values) + ")";
+        System.out.println(query);
+
+        Integer id = -1;
+        try (Connection connection = ConnectionUtil.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            int index = 1;
+            if ((name != null) && !name.isEmpty()) {
+                stmt.setString(index, name);
+                ++index;
+            }
+            if ((vendorCode != null) && !vendorCode.isEmpty()) {
+                stmt.setInt(index, Integer.parseInt(vendorCode));
+                ++index;
+            }
+            if ((producingCountry != null) && !producingCountry.isEmpty()) {
+                stmt.setString(index, producingCountry);
+                ++index;
+            }
+            if ((category != null ) && !category.isEmpty()) {
+                stmt.setString(index, category);
+                ++index;
+            }
+            if ((price != null) && !price.isEmpty()) {
+                stmt.setDouble(index, Double.parseDouble(price));
+            }
+
+            stmt.executeUpdate();
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            while (rs.next()) {
+                id = rs.getInt(1);
+                System.out.println("Insert row with id = "+id);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostgreSQLDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    public String updateBeautyProduct(String id, String name, String producingСountry, String vendorCode, String category, String price)
+    {
+        if (id.isEmpty())
+            return "Wrong query: Id is empty";
+
+        ArrayList<String> keys = new ArrayList<String>();
+        if ((name != null) && !name.isEmpty())
+        {
+            keys.add("name=?");
+        }
+        if ((vendorCode != null) && !vendorCode.isEmpty())
+        {
+            keys.add("vendorСode=?");
+        }
+        if ((producingСountry != null) && !producingСountry.isEmpty())
+        {
+            keys.add("producingСountry=?");
+        }
+        if ((category != null) && !category.isEmpty())
+        {
+            keys.add("category=?");
+        }
+        if ((price != null) && !price.isEmpty())
+        {
+            keys.add("price=?");
+        }
+
+        String query = "UPDATE \"BeautyProducts\" SET " + String.join(", ", keys) + " WHERE id=?";
+        System.out.println(query);
+
+        String status;
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement(query);
+
+            int index = 1;
+            if ((name != null) && !name.isEmpty()) {
+                stmt.setString(index, name);
+                ++index;
+            }
+            if ((vendorCode != null) && !vendorCode.isEmpty()) {
+                stmt.setInt(index, Integer.parseInt(vendorCode));
+                ++index;
+            }
+            if ((producingСountry != null) && !producingСountry.isEmpty()) {
+                stmt.setString(index, producingСountry);
+                ++index;
+            }
+            if ((category != null) && !category.isEmpty()) {
+                stmt.setString(index, category);
+                ++index;
+            }
+            if ((price != null) && !price.isEmpty()) {
+                stmt.setDouble(index, Double.parseDouble(price));
+                ++index;
+            }
+            stmt.setInt(index, Integer.parseInt(id));
+
+            int count_row = stmt.executeUpdate();
+            status = (count_row > 0) ? ("Updated " + count_row + " row") : "No updated row";
+        } catch (SQLException ex) {
+            status = "Error:" + ex.toString();
+            Logger.getLogger(PostgreSQLDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+
+    public String deleteBeautyProduct(String id)
+    {
+        if (id.isEmpty())
+            return "Wrong query: Id is empty";
+
+        String status;
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement stmt = connection.prepareStatement("DELETE from \"BeautyProducts\" where id=?");
+            stmt.setInt(1, Integer.parseInt(id));
+            int count_row = stmt.executeUpdate();
+            status = (count_row > 0) ? ("Deleted " + count_row + " row") : "No deleted row";
+        } catch (SQLException ex) {
+            status = "Error:" + ex.toString();
+            Logger.getLogger(PostgreSQLDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
     }
 
 }
