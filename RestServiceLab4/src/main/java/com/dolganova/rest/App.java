@@ -17,6 +17,7 @@ public class App {
         HttpServer server = null;
         try {
             ResourceConfig resourceConfig = new PackagesResourceConfig(BeautyProductResource.class.getPackage().getName());
+            resourceConfig.getProperties().put("com.sun.jersey.spi.container.ContainerRequestFilters", "com.dolganova.rest.AuthenticationFilter");
             server = GrizzlyServerFactory.createHttpServer(BASE_URI, resourceConfig);
             server.start();
             System.in.read();
