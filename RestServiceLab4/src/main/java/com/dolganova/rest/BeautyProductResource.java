@@ -1,7 +1,6 @@
 package com.dolganova.rest;
 
-import com.dolganova.exception.EmptyIdentifierException;
-import com.dolganova.exception.NonKeySpecifiedException;
+import com.dolganova.exception.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -44,7 +43,7 @@ public class BeautyProductResource {
      {
         if (isBodyFieldsEmpty(name, producingCountry, vendorCode, category, price))
         {
-            throw NonKeySpecifiedException.DEFAULT_INSTANCE;
+            throw new com.dolganova.exception.NonKeySpecifiedException("No one key is specified! Name, country, vendor code, category or price should be set.");
         }
         PostgreSQLDAO dao = new PostgreSQLDAO();
         Integer beautyProductId = dao.insertBeautyProduct(name, producingCountry, vendorCode, category, price);
@@ -64,7 +63,7 @@ public class BeautyProductResource {
         }
         if (isBodyFieldsEmpty(name, producingCountry, vendorCode, category, price))
         {
-            throw NonKeySpecifiedException.DEFAULT_INSTANCE;
+            throw new com.dolganova.exception.NonKeySpecifiedException("No one key is specified! Name, country, vendor code, category or price should be set.");
         }
 
         PostgreSQLDAO dao = new PostgreSQLDAO();

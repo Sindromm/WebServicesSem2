@@ -67,7 +67,7 @@ public class ActionMenu {
         }
     }
 
-    private void processQueryToStandalone(Client client, BufferedReader br){
+    private void processQueryToStandalone(Client client, BufferedReader br) {
         try {
             if (!authorize(client, br))
             {
@@ -111,8 +111,8 @@ public class ActionMenu {
             System.out.println(e);
         }
     }
-    private boolean authorize(Client client, BufferedReader br)
-    {
+
+    private boolean authorize(Client client, BufferedReader br) {
         Integer tryCount = 3;
         try {
             while (tryCount > 0)
@@ -126,8 +126,7 @@ public class ActionMenu {
                 WebResource webResource = client.resource(authURL);
                 ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).get(ClientResponse.class);
 
-                if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-                    System.err.println("Request failed: " + response.toString() + " " + response.getEntity(String.class));
+                if (checkException(response)) {
                     tryCount--;
                     continue;
                 }
@@ -146,10 +145,9 @@ public class ActionMenu {
     private void getAllBeautyProducts(Client client) {
         WebResource webResource = client.resource(URL);
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).get(ClientResponse.class);
-        if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new IllegalStateException("Request failed: " + response.toString() + " " + response.getEntity(String.class));
+        if (checkException(response)) {
+            return;
         }
-
         GenericType<List<BeautyProduct>> type = new GenericType<List<BeautyProduct>>() {};
         printList(response.getEntity(type));
     }
@@ -191,8 +189,8 @@ public class ActionMenu {
 
             ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).get(ClientResponse.class);
 
-            if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-                throw new IllegalStateException("Request failed: " + response.toString());
+            if (checkException(response)) {
+                return;
             }
 
             GenericType<List<BeautyProduct>> type = new GenericType<List<BeautyProduct>>() {};
@@ -239,8 +237,8 @@ public class ActionMenu {
         webResource = fillQueryParameters(webResource, null, name, producingCountry, vendorCode, category, price);
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).post(ClientResponse.class);
 
-        if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new IllegalStateException("Request failed: " + response.toString());
+        if (checkException(response)) {
+            return;
         }
 
         String id = response.getEntity(String.class);
@@ -285,8 +283,8 @@ public class ActionMenu {
         webResource = fillQueryParameters(webResource, id, name, producingCountry, vendorCode, category, price);
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).put(ClientResponse.class);
 
-        if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new IllegalStateException("Request failed: " + response.toString() + response.getEntity(String.class));
+        if (checkException(response)) {
+            return;
         }
 
         String status = response.getEntity(String.class);
@@ -301,6 +299,9 @@ public class ActionMenu {
             webResource = webResource.queryParam("id", id);
         }
         ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("authorization", encodeAuthData).delete(ClientResponse.class);
+        if (checkException(response)) {
+            return;
+        }
         String status = response.getEntity(String.class);
         System.out.println("Status: " + status);
     }
@@ -333,4 +334,15 @@ public class ActionMenu {
         return webResource;
     }
 
+    private boolean checkException(ClientResponse response) {
+        if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            String error = response.getEntity(String.class);
+            if (error != null && !error.isEmpty())
+                System.err.println("Request failed. Error code - " + response.getStatus() + ": " + error);
+            else
+                System.err.println("Request failed. Error code - " + response.getStatus());
+            return true;
+        }
+        return false;
+    }
 }
